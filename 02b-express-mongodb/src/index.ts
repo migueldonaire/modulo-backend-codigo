@@ -1,6 +1,7 @@
 import express from "express";
 import type { NextFunction, Request, Response } from "express";
 import productsRouter from "./routes/products";
+import categoriesRouter from "./routes/categories";
 import { connectDb } from "./db";
 
 const app = express();
@@ -41,6 +42,7 @@ app.get("/api/hello", (req, res) => {
 });
 
 app.use("/api/products", productsRouter);
+app.use("/api/categories", categoriesRouter); // Reto 2
 
 // 5. Ninguna ruta ha respondido: 404
 app.use((req, res) => {

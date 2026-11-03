@@ -1,23 +1,28 @@
 {
   "name": "02b-express-mongodb",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "seed": "docker cp mongo/seed.js mongodb-practica:/tmp/seed.js && docker exec mongodb-practica mongosh --quiet -u admin -p admin_dev_123 --authenticationDatabase admin /tmp/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^5.3.0",
-    "mongodb": "^7.7.0"
+    "mongodb": "^7.8.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.5",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
-  }
+    "typescript": "~6.0",
+    "typescript-eslint": "^8.72.1"
+  },
+  "private": true
 }

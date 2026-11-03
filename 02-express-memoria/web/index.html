@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Productos</title></head>
+<body>
+  <h1>Productos</h1>
+  <ul id="lista"></ul>
+
+  <!-- Ejercicio 8.2: formulario para crear productos -->
+  <form id="formulario">
+    <input id="name" placeholder="Nombre" required>
+    <input id="price" type="number" step="0.01" min="0" placeholder="Precio" required>
+    <button>Crear</button>
+  </form>
+  <p id="mensaje"></p>
+
+  <script>
+    const API = "http://localhost:3000/api/products";
+
+    async function cargarProductos() {
+      const response = await fetch(API);
+      const products = await response.json();
+
+      const lista = document.querySelector("#lista");
+      lista.innerHTML = "";
+      for (const product of products) {
+        const li = document.createElement("li");
+        li.textContent = `${product.name}: ${product.price} €`;
+        lista.append(li);
+      }
+    }
+
+    document.querySelector("#formulario").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const response = await fetch(API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: document.querySelector("#name").value,
+          // El valor de un <input> siempre es texto: lo pasamos a número
+          price: Number(document.querySelector("#price").value)
+        })
+      });
+
+      const data = await response.json();
+      document.querySelector("#mensaje").textContent =
+        response.ok ? `Creado con ID ${data.id}` : `Error: ${data.error}`;
+
+      cargarProductos();
+    });
+
+    cargarProductos();
+  </script>
+</body>
+</html>

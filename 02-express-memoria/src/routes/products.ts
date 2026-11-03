@@ -2,19 +2,23 @@ import { Router } from "express";
 
 const router = Router();
 
+// Ejercicio 10: categoría en cada producto
 type Product = {
   id: number;
   name: string;
   price: number;
+  category: string;
 };
 
-let nextId = 3;
+let nextId = 4;
 
 const products: Product[] = [
-  { id: 1, name: "Teclado", price: 29.99 },
-  { id: 2, name: "Ratón", price: 15 }
+  { id: 1, name: "Teclado", price: 29.99, category: "perifericos" },
+  { id: 2, name: "Ratón", price: 15, category: "perifericos" },
+  { id: 3, name: "Silla", price: 49.5, category: "muebles" }
 ];
 
+// Ejercicio 9: validación en una sola función.
 // Devuelve un mensaje de error, o null si los datos son válidos.
 // partial = true: los campos pueden faltar (para PATCH).
 function validateProduct(body: { name?: unknown; price?: unknown }, partial: boolean): string | null {
@@ -35,8 +39,35 @@ function validateProduct(body: { name?: unknown; price?: unknown }, partial: boo
   return null;
 }
 
-router.get("/", (_req, res) => {
-  res.json(products);
+// Ejercicios 11 y 12 y reto 1: filtrar por categoría, buscar por nombre y paginar.
+// GET /api/products?category=muebles&search=sil&page=1&limit=10
+router.get("/", (req, res) => {
+  const { category, search } = req.query;
+
+  let result = products;
+
+  // Ejercicio 11: filtrar por categoría
+  if (typeof category === "string") {
+    result = result.filter((product) => product.category === category);
+  }
+
+  // Ejercicio 12: buscar por nombre sin distinguir mayúsculas y minúsculas
+  if (typeof search === "string") {
+    const text = search.toLowerCase();
+    result = result.filter((product) => product.name.toLowerCase().includes(text));
+  }
+
+  // Reto 1: paginación
+  const page = Number(req.query.page ?? 1);
+  const limit = Number(req.query.limit ?? 10);
+
+  if (!Number.isInteger(page) || page < 1 || !Number.isInteger(limit) || limit < 1 || limit > 50) {
+    res.status(400).json({ error: "page debe ser >= 1 y limit debe estar entre 1 y 50" });
+    return;
+  }
+
+  const start = (page - 1) * limit;
+  res.json(result.slice(start, start + limit));
 });
 
 router.get("/:id", (req, res) => {
@@ -69,11 +100,50 @@ router.post("/", (req, res) => {
   const newProduct: Product = {
     id: nextId++,
     name: body.name.trim(),
-    price: body.price
+    price: body.price,
+    // Ejercicio 10: si no llega categoría, "sin-categoria"
+    category: typeof body.category === "string" ? body.category : "sin-categoria"
   };
 
   products.push(newProduct);
   res.status(201).json(newProduct);
+});
+
+// Ejercicio 14: PUT sustituye el producto entero.
+// A diferencia de PATCH, name y price son obligatorios (si falta uno, 400).
+// Si no llega category, se pone "sin-categoria", igual que al crear.
+router.put("/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  if (!Number.isInteger(id)) {
+    res.status(400).json({ error: "El ID debe ser un número entero" });
+    return;
+  }
+
+  const index = products.findIndex((item) => item.id === id);
+
+  if (index === -1) {
+    res.status(404).json({ error: "Producto no encontrado" });
+    return;
+  }
+
+  const body = req.body ?? {};
+  const error = validateProduct(body, false);
+
+  if (error) {
+    res.status(400).json({ error });
+    return;
+  }
+
+  const replaced: Product = {
+    id,
+    name: body.name.trim(),
+    price: body.price,
+    category: typeof body.category === "string" ? body.category : "sin-categoria"
+  };
+
+  products[index] = replaced;
+  res.json(replaced);
 });
 
 router.patch("/:id", (req, res) => {
