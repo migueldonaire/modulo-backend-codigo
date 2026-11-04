@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "seed": "docker cp mongo/seed.js mongodb-practica:/tmp/seed.js && docker exec mongodb-practica mongosh --quiet -u admin -p admin_dev_123 --authenticationDatabase admin /tmp/seed.js"

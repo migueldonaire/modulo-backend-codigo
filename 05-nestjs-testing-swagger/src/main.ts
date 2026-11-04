@@ -1,9 +1,11 @@
+import { existsSync } from 'node:fs';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { configureApp } from './app.config';
 
-process.loadEnvFile(); // lee el .env
+// En tu ordenador, lee el .env. En Render no hay .env: las variables las pone Render.
+if (existsSync('.env')) process.loadEnvFile();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

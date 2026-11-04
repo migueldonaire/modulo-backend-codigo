@@ -5,7 +5,8 @@ import categoriesRouter from "./routes/categories";
 import { connectDb } from "./db";
 
 const app = express();
-const PORT = 3000;
+// Render nos dice el puerto en la variable PORT. En tu ordenador no existe: usamos 3000.
+const PORT = process.env.PORT ?? 3000;
 
 // 1. Registrar cada petición en la terminal
 app.use((req, _res, next) => {
