@@ -2,8 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-// Lee el archivo .env y mete sus valores en process.env
-process.loadEnvFile();
+process.loadEnvFile(); // lee el .env
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,9 +14,12 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // quita los campos que no estén en el DTO...
-      forbidNonWhitelisted: true, // ...y mejor aún: responde 400 si llegan
+      forbidNonWhitelisted: true,
+      transform: true,
     }),
   );
+
+  app.enableCors({ origin: 'http://localhost:5173' });
 
   await app.listen(process.env.PORT ?? 3000);
 }

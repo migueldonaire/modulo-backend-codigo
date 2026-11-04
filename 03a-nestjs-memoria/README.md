@@ -1,6 +1,6 @@
 # 03a · NestJS: la API de libros en memoria
 
-Estado al terminar los apuntes `03a_nestjs_fundamentos.md`: CRUD de libros (`id`, `title`, `author`, `pages`) con NestJS 11, datos en memoria, DTO con `class-validator`, `ParseIntPipe` y errores 400/404.
+Estado al terminar los apuntes `03a_nestjs_fundamentos.md`: CRUD de libros (`id`, `title`, `author`, `pages`) con NestJS 11, datos en memoria, DTO con `class-validator`, `ParseIntPipe`, errores 400/404 y CORS.
 
 ```bash
 npm install
