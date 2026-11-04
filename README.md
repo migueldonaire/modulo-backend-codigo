@@ -16,6 +16,10 @@ Proyectos terminados de los apuntes de backend (Express, MongoDB, NestJS y Postg
 
 Los proyectos 03a, 03b, 04-nestjs-auth y 05-nestjs-testing-swagger son la misma API de libros en cuatro momentos (los apuntes nuevos, sesiones de 3 horas). Los proyectos 03 y 04-nestjs-auth-testing-swagger son el mismo proyecto en dos momentos. El 04 incluye también las soluciones de algunos ejercicios de testing (`products.service.spec.ts`, `roles.guard.spec.ts`, `test/auth.e2e-spec.ts` y el test extra de `auth.service.spec.ts`).
 
+## Frontend (React)
+
+En `react-academia/` está la app Academia de los apuntes de React, una carpeta por sesión (01 a 05). Mira su `README.md`.
+
 ## Requisitos
 
 - Node 24 LTS.

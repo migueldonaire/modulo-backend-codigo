@@ -1,0 +1,30 @@
+.tarjeta {
+  background: white;
+  border: 1px solid #e3e6eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.titulo {
+  margin: 8px 0;
+  font-size: 18px;
+}
+
+.precio {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.boton {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #1f4fb8;
+  background: white;
+  color: #1f4fb8;
+  cursor: pointer;
+}
+
+.botonActivo {
+  background: #1f4fb8;
+  color: white;
+}

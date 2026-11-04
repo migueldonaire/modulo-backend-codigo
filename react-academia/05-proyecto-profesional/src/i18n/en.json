@@ -1,0 +1,27 @@
+{
+  "menu": {
+    "cursos": "Courses",
+    "misCursos": "My courses ({{cantidad}})",
+    "admin": "Admin",
+    "entrar": "Log in",
+    "salir": "Log out",
+    "hola": "Hi, {{nombre}}"
+  },
+  "catalogo": {
+    "titulo": "Course catalogue",
+    "cargando": "Loading courses...",
+    "error": "Courses could not be loaded.",
+    "cursos_one": "{{count}} course",
+    "cursos_other": "{{count}} courses",
+    "todas": "All"
+  },
+  "curso": {
+    "horas": "{{horas}} hours",
+    "ultimasPlazas": "Last places",
+    "anadir": "Add to My courses",
+    "quitar": "Remove from My courses"
+  },
+  "buscador": {
+    "etiqueta": "Search courses"
+  }
+}

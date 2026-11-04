@@ -1,0 +1,27 @@
+{
+  "menu": {
+    "cursos": "Cursos",
+    "misCursos": "Mis cursos ({{cantidad}})",
+    "admin": "Admin",
+    "entrar": "Entrar",
+    "salir": "Cerrar sesión",
+    "hola": "Hola, {{nombre}}"
+  },
+  "catalogo": {
+    "titulo": "Catálogo de cursos",
+    "cargando": "Cargando cursos...",
+    "error": "No se han podido cargar los cursos.",
+    "cursos_one": "{{count}} curso",
+    "cursos_other": "{{count}} cursos",
+    "todas": "Todas"
+  },
+  "curso": {
+    "horas": "{{horas}} horas",
+    "ultimasPlazas": "Últimas plazas",
+    "anadir": "Añadir a Mis cursos",
+    "quitar": "Quitar de Mis cursos"
+  },
+  "buscador": {
+    "etiqueta": "Buscar curso"
+  }
+}
