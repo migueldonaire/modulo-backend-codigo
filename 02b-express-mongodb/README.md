@@ -47,10 +47,10 @@ Si sale `Authentication failed`, es que el volumen de datos ya existía sin cont
 ├── mongo/seed.js              ← datos de prueba (npm run seed)
 ├── src/
 │   ├── routes/
-│   │   ├── products.ts        ← CRUD de productos con MongoDB (apartado 4, ej. 5 y 6)
+│   │   ├── products.ts        ← CRUD de productos con MongoDB (apartado 4, ej. 7)
 │   │   └── categories.ts      ← CRUD de categorías con índice único (reto 2)
 │   ├── soluciones/            ← variantes que NO están montadas en la API
-│   │   ├── ejercicio-07-patch-updateOne.ts
+│   │   ├── ejercicio-08-patch-updateOne.ts
 │   │   └── reto-1-products-id.ts
 │   ├── db.ts                  ← conexión (apartado 3)
 │   └── index.ts               ← middlewares, rutas y arranque
@@ -65,10 +65,9 @@ Si sale `Authentication failed`, es que el volumen de datos ya existía sin cont
 
 | Apunte | Dónde | Qué hay |
 |---|---|---|
-| Ejercicios 1-4 | — | Son preguntas y pruebas; la respuesta está en el apunte. |
-| Ejercicio 5 | `src/routes/products.ts` | Campo `category` (validación, `POST`, `PATCH`) y `GET /api/products?category=muebles` |
-| Ejercicio 6 | `src/routes/products.ts` | `GET /api/products?search=tec` con `$regex` (combinable con `category`) |
-| Ejercicio 7 | `src/soluciones/ejercicio-07-patch-updateOne.ts` | `PATCH` con `updateOne` + `findOne`. Cómo montarlo, en el comentario de arriba del archivo. |
+| Ejercicios 1-6 | — | Pruebas y preguntas: se resuelven en clase. |
+| Ejercicio 7 | `src/routes/products.ts` | Campo `category` (validación, `POST`, `PATCH`) y `GET /api/products?category=muebles&search=tec` con `$regex` |
+| Ejercicio 8 | `src/soluciones/ejercicio-08-patch-updateOne.ts` | `PATCH` con `updateOne` + `findOne`. Cómo montarlo, en el comentario de arriba del archivo. |
 | Reto 1 | `src/soluciones/reto-1-products-id.ts` | Router de productos que responde `id` en vez de `_id` con `toApi()`. Para usarlo, cambia el import de `productsRouter` en `src/index.ts`. |
 | Reto 2 | `src/routes/categories.ts` | CRUD de `/api/categories`. Nombre repetido → error `11000` → `409`. El índice único se crea al arrancar (`src/db.ts`) y en `mongo/seed.js`. |
 

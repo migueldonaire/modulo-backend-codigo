@@ -47,7 +47,7 @@ app.get("/api/hello", (req, res) => {
   res.json({ message: `${greeting}, ${name}` });
 });
 
-// Reto 2: llamar a otra API (Open-Meteo) desde el backend
+// Reto 3: llamar a otra API (Open-Meteo) desde el backend
 app.get("/api/weather", async (_req, res) => {
   const response = await fetch(
     "https://api.open-meteo.com/v1/forecast?latitude=39.47&longitude=-0.38&current=temperature_2m"
@@ -62,13 +62,13 @@ app.get("/api/weather", async (_req, res) => {
   res.json({ city: "Valencia", temperature: data.current.temperature_2m });
 });
 
-// Ejercicio 7 (temporal): descomenta para ver el middleware de errores en acción
+// Ejercicio 8 (temporal): descomenta para ver el middleware de errores en acción
 // app.get("/api/boom", () => {
 //   throw new Error("Algo ha explotado");
 // });
 
 app.use("/api/products", productsRouter);
-app.use("/api/categories", categoriesRouter); // Ejercicio 13
+app.use("/api/categories", categoriesRouter); // Reto 2
 
 // 5. Ninguna ruta ha respondido: 404
 app.use((req, res) => {

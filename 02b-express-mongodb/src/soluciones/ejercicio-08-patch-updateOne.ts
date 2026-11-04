@@ -1,10 +1,10 @@
-// Ejercicio 7: el PATCH de productos con updateOne en lugar de findOneAndUpdate.
+// Ejercicio 8: el PATCH de productos con updateOne en lugar de findOneAndUpdate.
 //
 // No está montado en la API. Para probarlo, en src/index.ts cambia
 //   app.use("/api/products", productsRouter);
 // por
 //   app.use("/api/products", patchWithUpdateOne, productsRouter);
-// e importa: import patchWithUpdateOne from "./soluciones/ejercicio-07-patch-updateOne";
+// e importa: import patchWithUpdateOne from "./soluciones/ejercicio-08-patch-updateOne";
 // (al ir delante, su PATCH responde antes que el del router de productos)
 import { Router } from "express";
 import { ObjectId } from "mongodb";

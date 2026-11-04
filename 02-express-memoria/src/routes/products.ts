@@ -2,7 +2,7 @@ import { Router } from "express";
 
 const router = Router();
 
-// Ejercicio 10: categoría en cada producto
+// Ejercicio 12: categoría en cada producto
 type Product = {
   id: number;
   name: string;
@@ -18,7 +18,7 @@ const products: Product[] = [
   { id: 3, name: "Silla", price: 49.5, category: "muebles" }
 ];
 
-// Ejercicio 9: validación en una sola función.
+// Ejercicio 11: validación en una sola función.
 // Devuelve un mensaje de error, o null si los datos son válidos.
 // partial = true: los campos pueden faltar (para PATCH).
 function validateProduct(body: { name?: unknown; price?: unknown }, partial: boolean): string | null {
@@ -39,19 +39,19 @@ function validateProduct(body: { name?: unknown; price?: unknown }, partial: boo
   return null;
 }
 
-// Ejercicios 11 y 12 y reto 1: filtrar por categoría, buscar por nombre y paginar.
+// Ejercicio 13 y reto 1: filtrar por categoría, buscar por nombre y paginar.
 // GET /api/products?category=muebles&search=sil&page=1&limit=10
 router.get("/", (req, res) => {
   const { category, search } = req.query;
 
   let result = products;
 
-  // Ejercicio 11: filtrar por categoría
+  // Ejercicio 13.1: filtrar por categoría
   if (typeof category === "string") {
     result = result.filter((product) => product.category === category);
   }
 
-  // Ejercicio 12: buscar por nombre sin distinguir mayúsculas y minúsculas
+  // Ejercicio 13.2: buscar por nombre sin distinguir mayúsculas y minúsculas
   if (typeof search === "string") {
     const text = search.toLowerCase();
     result = result.filter((product) => product.name.toLowerCase().includes(text));
@@ -101,7 +101,7 @@ router.post("/", (req, res) => {
     id: nextId++,
     name: body.name.trim(),
     price: body.price,
-    // Ejercicio 10: si no llega categoría, "sin-categoria"
+    // Ejercicio 12: si no llega categoría, "sin-categoria"
     category: typeof body.category === "string" ? body.category : "sin-categoria"
   };
 
