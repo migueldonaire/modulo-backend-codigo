@@ -1,23 +1,27 @@
 import { ExecutionContext, ForbiddenException } from '@nestjs/common';
+import { UsersService } from '../users/users.service';
 import { EmployeeGuard } from './employee.guard';
 
-// Crea un "contexto" falso con el usuario que queramos dentro de la petición
-function contextWithRole(role: string): ExecutionContext {
-  const request = { user: { id: 1, email: 'x@mail.com', role } };
-  return {
-    switchToHttp: () => ({ getRequest: () => request }),
-  } as unknown as ExecutionContext;
-}
+// Un "contexto" falso: una petición que ya trae el id del usuario
+const context = {
+  switchToHttp: () => ({ getRequest: () => ({ userId: 1 }) }),
+} as unknown as ExecutionContext;
 
 describe('EmployeeGuard', () => {
-  const guard = new EmployeeGuard();
+  // Un UsersService FALSO: findById responde lo que nosotros digamos
+  const fakeUsersService = { findById: jest.fn() };
+  const guard = new EmployeeGuard(fakeUsersService as unknown as UsersService);
 
-  it('deja pasar a un empleado', () => {
-    expect(guard.canActivate(contextWithRole('employee'))).toBe(true);
+  it('deja pasar a un empleado', async () => {
+    fakeUsersService.findById.mockResolvedValue({ id: 1, role: 'employee' });
+
+    await expect(guard.canActivate(context)).resolves.toBe(true);
   });
 
-  it('no deja pasar a un cliente (403)', () => {
-    expect(() => guard.canActivate(contextWithRole('customer'))).toThrow(
+  it('no deja pasar a un cliente (403)', async () => {
+    fakeUsersService.findById.mockResolvedValue({ id: 1, role: 'customer' });
+
+    await expect(guard.canActivate(context)).rejects.toThrow(
       ForbiddenException,
     );
   });

@@ -5,7 +5,7 @@ import { BooksController } from './books.controller';
 import { BooksService } from './books.service';
 
 @Module({
-  imports: [DatabaseModule, UsersModule], // el Pool, y UsersService para el AuthGuard
+  imports: [DatabaseModule, UsersModule], // el Pool, y UsersService para el EmployeeGuard
   controllers: [BooksController],
   providers: [BooksService],
 })

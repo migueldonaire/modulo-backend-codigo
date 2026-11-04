@@ -44,4 +44,13 @@ export class AuthService {
     const accessToken = await this.jwtService.signAsync(payload);
     return { accessToken };
   }
+
+  // GET /api/auth/me: buscamos al usuario en la base de datos
+  async me(userId: number) {
+    const user = await this.usersService.findById(userId);
+    if (!user) {
+      throw new UnauthorizedException('El usuario ya no existe'); // → 401
+    }
+    return { id: user.id, email: user.email, role: user.role }; // sin el hash
+  }
 }

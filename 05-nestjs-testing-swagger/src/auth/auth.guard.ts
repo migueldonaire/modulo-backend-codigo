@@ -5,16 +5,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
 import { AuthRequest, JwtPayload } from './jwt-payload';
 
-// AUTENTICACIÓN: ¿quién eres? Sin un token válido → 401
+// AUTENTICACIÓN: ¿el token es bueno? Si no → 401
+// Solo mira el token. No va a la base de datos.
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(
-    private readonly jwtService: JwtService,
-    private readonly usersService: UsersService,
-  ) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     // 1. Cogemos la petición (el req de Express)
@@ -26,22 +23,15 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException('Falta el token');
     }
 
-    // 3. Comprobamos la firma y la caducidad, y sacamos el id
-    let payload: JwtPayload;
     try {
-      payload = await this.jwtService.verifyAsync<JwtPayload>(token);
+      // 3. Comprobamos la firma y la caducidad. Si algo falla, salta al catch
+      const payload = await this.jwtService.verifyAsync<JwtPayload>(token);
+
+      // 4. Apuntamos en la petición el id que venía en el token
+      request.userId = payload.sub;
+      return true; // puede pasar
     } catch {
       throw new UnauthorizedException('Token no válido o caducado');
     }
-
-    // 4. Buscamos al usuario en la base de datos, AHORA
-    const user = await this.usersService.findById(payload.sub);
-    if (!user) {
-      throw new UnauthorizedException('El usuario ya no existe');
-    }
-
-    // 5. Guardamos en la petición el usuario de la base de datos (sin el hash)
-    request.user = { id: user.id, email: user.email, role: user.role };
-    return true; // puede pasar
   }
 }

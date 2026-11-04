@@ -31,6 +31,6 @@ export class AuthController {
   @Get('me') // GET /api/auth/me → quién soy (necesita token)
   @UseGuards(AuthGuard)
   me(@Req() request: AuthRequest) {
-    return request.user; // el usuario que el AuthGuard acaba de leer de la base de datos
+    return this.authService.me(request.userId); // el servicio busca al usuario
   }
 }
