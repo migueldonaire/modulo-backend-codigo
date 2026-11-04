@@ -1,4 +1,4 @@
-// Reto 2: el CRUD de categorías del apunte 02 (ejercicio 13), ahora en MongoDB.
+// Reto 2: el CRUD de categorías del apunte 02 (reto 2), ahora en MongoDB.
 // El nombre no se repite gracias a un índice único (ver connectDb en src/db.ts
 // y mongo/seed.js). Si se repite, el driver lanza un error con code 11000 → 409.
 import { Router } from "express";

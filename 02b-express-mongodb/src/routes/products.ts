@@ -4,7 +4,7 @@ import { getDb } from "../db";
 
 const router = Router();
 
-// Ejercicio 5: categoría en cada producto
+// Ejercicio 7.1: categoría en cada producto
 export type Product = {
   name: string;
   price: number;
@@ -35,7 +35,7 @@ export function validateProduct(
     }
   }
 
-  // Ejercicio 5: la categoría es opcional, pero si llega tiene que ser un texto
+  // Ejercicio 7.1: la categoría es opcional, pero si llega tiene que ser un texto
   if (category !== undefined) {
     if (typeof category !== "string" || category.trim() === "") {
       return "La categoría debe ser un texto no vacío";
@@ -45,16 +45,16 @@ export function validateProduct(
   return null;
 }
 
-// Ejercicios 5 y 6: GET /api/products?category=muebles&search=sil
+// Ejercicio 7: GET /api/products?category=muebles&search=sil
 router.get("/", async (req, res) => {
   const filter: { category?: string; name?: { $regex: string; $options: string } } = {};
 
-  // Ejercicio 5: filtrar por categoría
+  // Ejercicio 7.2: filtrar por categoría
   if (typeof req.query.category === "string") {
     filter.category = req.query.category;
   }
 
-  // Ejercicio 6: buscar por nombre sin distinguir mayúsculas
+  // Ejercicio 7.3: buscar por nombre sin distinguir mayúsculas
   if (typeof req.query.search === "string") {
     filter.name = { $regex: req.query.search, $options: "i" };
   }
@@ -91,7 +91,7 @@ router.post("/", async (req, res) => {
   const newProduct: Product = {
     name: body.name.trim(),
     price: body.price,
-    // Ejercicio 5: si no llega categoría, "sin-categoria"
+    // Ejercicio 7.1: si no llega categoría, "sin-categoria"
     category: body.category?.trim() ?? "sin-categoria"
   };
 

@@ -1,4 +1,4 @@
-// Ejercicio 13: CRUD de categorías en memoria, montado en /api/categories
+// Reto 2: CRUD de categorías en memoria, montado en /api/categories
 import { Router } from "express";
 
 const router = Router();
