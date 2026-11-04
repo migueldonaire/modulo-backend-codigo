@@ -1,10 +1,10 @@
 # Código de los apuntes de backend
 
-Los proyectos terminados de los apuntes de backend (Express, MongoDB, NestJS y PostgreSQL) y de React. Cada carpeta es un proyecto independiente, con su propio `package.json` y su `README.md`.
+Los proyectos terminados de los apuntes de backend (Express, MongoDB, NestJS y PostgreSQL). Cada carpeta es un proyecto independiente, con su propio `package.json` y su `README.md`.
 
 ## Los proyectos
 
-Son dos APIs y una app de React, cada una en varios momentos. Cada carpeta es el estado al terminar esa clase.
+Son dos APIs, cada una en varios momentos. Cada carpeta es el estado al terminar esa clase.
 
 ### API de productos con Express
 
@@ -23,10 +23,6 @@ Estas dos carpetas incluyen las soluciones de los ejercicios y retos. Su `README
 | `03b-nestjs-postgresql` | `03b_nestjs_postgresql.md` | La 03a con el servicio contra PostgreSQL (`pg`, SQL a mano, sin ORM). |
 | `04-nestjs-auth` | `04_nestjs_autenticacion.md` | La 03b con registro, login (argon2 + JWT), `AuthGuard` y `EmployeeGuard`: los clientes leen y los empleados editan. |
 | `05-nestjs-testing-swagger` | `05_nestjs_testing_swagger.md` | La 04 con tests de Jest (unitarios y de integración) y Swagger. |
-
-### Frontend con React
-
-En `react-academia/` está la app Academia de los apuntes de React, una carpeta por sesión (01 a 05). Mira su `README.md`.
 
 ## Requisitos
 
