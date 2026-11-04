@@ -95,3 +95,16 @@ curl -i -X POST http://localhost:3000/api/categories -H "Content-Type: applicati
 ```
 
 Con MongoDB parado (`docker compose stop`), cualquier petición tarda unos 30 segundos y responde `500`: lo responde el middleware de errores (apartado 5 del apunte).
+
+## Desplegar en Render
+
+Paso a paso en los apuntes `06_despliegue_render.md`. Resumen:
+
+| Campo de Render | Valor |
+|---|---|
+| Root Directory | `02b-express-mongodb` (si el proyecto está en una subcarpeta) |
+| Build Command | `npm install && npm run build` |
+| Start Command | `npm start` |
+| Variables | `MONGODB_URI` (la de MongoDB Atlas) y `DB_NAME=bootcamp_api` |
+
+`npm run build` compila TypeScript a `dist/` y `npm start` ejecuta `node dist/index.js`. El puerto sale de `process.env.PORT` (Render lo pone solo; en tu ordenador es 3000).
