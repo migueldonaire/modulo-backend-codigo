@@ -14,6 +14,14 @@ export class UsersService {
     return result.rows[0];
   }
 
+  async findById(id: number): Promise<User | undefined> {
+    const result = await this.pool.query<User>(
+      'SELECT id, email, password_hash, role FROM users WHERE id = $1',
+      [id],
+    );
+    return result.rows[0];
+  }
+
   async create(email: string, passwordHash: string): Promise<User> {
     const result = await this.pool.query<User>(
       `INSERT INTO users (email, password_hash)

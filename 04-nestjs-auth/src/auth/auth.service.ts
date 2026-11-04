@@ -40,11 +40,7 @@ export class AuthService {
       throw new UnauthorizedException('Correo o contraseña incorrectos'); // → 401
     }
 
-    const payload: JwtPayload = {
-      sub: user.id,
-      email: user.email,
-      role: user.role,
-    };
+    const payload: JwtPayload = { sub: user.id }; // solo el id
     const accessToken = await this.jwtService.signAsync(payload);
     return { accessToken };
   }

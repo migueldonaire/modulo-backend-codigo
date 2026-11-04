@@ -18,4 +18,4 @@ Para hacer empleado a un usuario:
 docker exec -it postgres-sql psql -U alumno -d bootcamp_api -c "UPDATE users SET role = 'employee' WHERE email = 'ana@mail.com';"
 ```
 
-Después hay que volver a hacer login: el rol va dentro del token.
+No hace falta volver a hacer login: el token solo lleva el id y el `AuthGuard` lee el rol de la base de datos en cada petición.

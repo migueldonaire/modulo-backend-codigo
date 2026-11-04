@@ -3,7 +3,7 @@ import { EmployeeGuard } from './employee.guard';
 
 // Crea un "contexto" falso con el usuario que queramos dentro de la petición
 function contextWithRole(role: string): ExecutionContext {
-  const request = { user: { sub: 1, email: 'x@mail.com', role } };
+  const request = { user: { id: 1, email: 'x@mail.com', role } };
   return {
     switchToHttp: () => ({ getRequest: () => request }),
   } as unknown as ExecutionContext;
