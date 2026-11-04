@@ -1,6 +1,7 @@
 import express from "express";
 import type { NextFunction, Request, Response } from "express";
 import productsRouter from "./routes/products";
+import categoriesRouter from "./routes/categories";
 
 const app = express();
 const PORT = 3000;
@@ -14,7 +15,7 @@ app.use((req, _res, next) => {
 // 2. CORS: permitir peticiones desde nuestra página web
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
@@ -33,13 +34,41 @@ app.get("/", (_req, res) => {
   res.send("Mi primera API con Express");
 });
 
-app.get("/api/hello", (req, res) => {
-  const name = req.query.name;
-
-  res.json({ message: `Hola, ${name ?? "persona"}` });
+// Ejercicio 1
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok" });
 });
 
+// Apartado 3 + ejercicio 2: saludo con ?name= y ?lang=en
+app.get("/api/hello", (req, res) => {
+  const name = req.query.name ?? "persona";
+  const greeting = req.query.lang === "en" ? "Hello" : "Hola";
+
+  res.json({ message: `${greeting}, ${name}` });
+});
+
+// Reto 2: llamar a otra API (Open-Meteo) desde el backend
+app.get("/api/weather", async (_req, res) => {
+  const response = await fetch(
+    "https://api.open-meteo.com/v1/forecast?latitude=39.47&longitude=-0.38&current=temperature_2m"
+  );
+
+  if (!response.ok) {
+    res.status(502).json({ error: "El servicio del tiempo no responde" });
+    return;
+  }
+
+  const data = await response.json();
+  res.json({ city: "Valencia", temperature: data.current.temperature_2m });
+});
+
+// Ejercicio 7 (temporal): descomenta para ver el middleware de errores en acción
+// app.get("/api/boom", () => {
+//   throw new Error("Algo ha explotado");
+// });
+
 app.use("/api/products", productsRouter);
+app.use("/api/categories", categoriesRouter); // Ejercicio 13
 
 // 5. Ninguna ruta ha respondido: 404
 app.use((req, res) => {

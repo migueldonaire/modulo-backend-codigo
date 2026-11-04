@@ -4,8 +4,8 @@ Proyectos terminados de los apuntes de backend (Express, MongoDB, NestJS y Postg
 
 | Carpeta | Apuntes | Qué contiene |
 |---|---|---|
-| `02-express-memoria` | `02_express_typescript.md` | API de productos con Express 5 + TypeScript. Datos en memoria, middlewares, CORS y router. |
-| `02b-express-mongodb` | `02b_express_mongodb.md` | La misma API guardando los datos en MongoDB con el driver oficial (sin Mongoose). |
+| `02-express-memoria` | `02_express_typescript.md` | API de productos con Express 5 + TypeScript. Datos en memoria, middlewares, CORS y router. Incluye las soluciones de todos los ejercicios y retos (filtros, búsqueda, paginación, CRUD de categorías, `PUT`, Open-Meteo) y la página web con `fetch`. |
+| `02b-express-mongodb` | `02b_express_mongodb.md` | La misma API guardando los datos en MongoDB con el driver oficial (sin Mongoose). Incluye las soluciones de los ejercicios y retos, `npm run seed` con datos de prueba y `compose.yaml`. |
 | `02c-express-capas` | `02c_arquitectura_mvc_capas.md` | La API del 02 en capas (rutas, controlador, servicio, modelo, DTO). Solución del reto. |
 | `03-nestjs-postgresql` | `03_nestjs_postgresql.md` | CRUD de productos con NestJS 11 + PostgreSQL usando `pg` (sin ORM). Estado al terminar el apunte 03. |
 | `04-nestjs-auth-testing-swagger` | `04a_autenticacion_jwt_roles.md` y `04b_testing_swagger.md` | El proyecto 03 con registro y login, JWT, refresh tokens, argon2, roles, tests con Jest (unitarios e integración) y Swagger. |
@@ -28,4 +28,10 @@ npm install
 cp .env.example .env   # solo 02b, 03 y 04
 ```
 
-Después sigue el `README.md` de esa carpeta.
+Después sigue el `README.md` de esa carpeta. En el de 02 y 02b hay una tabla que dice en qué archivo está la solución de cada ejercicio.
+
+## CI
+
+`02-express-memoria` y `02b-express-mongodb` llevan ESLint y su propio `.github/workflows/ci.yml` (el CI mínimo: htmlhint + lint + tipos). GitHub solo ejecuta los workflows de la raíz del repositorio, así que ese fichero funciona cuando copias la carpeta como repositorio independiente. Dentro de este repositorio, el `.github/workflows/ci.yml` de la raíz pasa lint y tipos de las dos carpetas.
+
+Usan TypeScript 6 (`typescript@~6.0`): `typescript-eslint` todavía no funciona con TypeScript 7.
