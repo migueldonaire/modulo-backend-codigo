@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres-03b
+    environment:
+      # Los mismos datos que DATABASE_URL en .env.example
+      POSTGRES_USER: alumno
+      POSTGRES_PASSWORD: alumno_dev_123
+      POSTGRES_DB: bootcamp_api
+    ports:
+      - "5432:5432"
+    volumes:
+      # Los datos se guardan aunque pares el contenedor
+      - postgres_data:/var/lib/postgresql/data
+      # La primera vez (volumen vacío) ejecuta schema.sql: crea la tabla books y 3 libros
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+
+volumes:
+  postgres_data:

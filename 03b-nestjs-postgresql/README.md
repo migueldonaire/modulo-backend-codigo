@@ -3,14 +3,26 @@
 Estado al terminar los apuntes `03b_nestjs_postgresql.md`: la API de la 03a, con el servicio guardando los libros en PostgreSQL (`pg`, SQL a mano con `$1`, `$2`...). Incluye `toBook` (fila → libro de la API) y el contrato opcional `BooksContract`.
 
 ```bash
+docker compose up -d   # PostgreSQL con la base de datos bootcamp_api y la tabla books
 npm install
 cp .env.example .env
-docker exec -i postgres-sql psql -U alumno -d academia -c "CREATE DATABASE bootcamp_api;"
-docker exec -i postgres-sql psql -U alumno -d bootcamp_api < database/schema.sql
-npm run start:dev
+npm run start:dev      # http://localhost:3000/api/books
 ```
 
-Necesita el contenedor `postgres-sql` de la clase de SQL. El `.env` se lee con `process.loadEnvFile()` (Node 20.12 o superior), solo si existe: en Render no hay `.env` y las variables las pone Render.
+El `compose.yaml` levanta PostgreSQL 17 (contenedor `postgres-03b`) con el mismo usuario y contraseña que `.env.example`, y ejecuta `database/schema.sql` al crearse.
+
+Si tienes encendido `postgres-sql` (u otro PostgreSQL), páralo antes: `docker stop postgres-sql`. Los dos usan el puerto 5432.
+
+`schema.sql` solo se ejecuta la primera vez, con el volumen vacío. Para empezar de cero: `docker compose down -v` y otra vez `docker compose up -d`.
+
+¿Prefieres el contenedor `postgres-sql` de la clase de SQL? Crea la base de datos a mano:
+
+```bash
+docker exec -i postgres-sql psql -U alumno -d academia -c "CREATE DATABASE bootcamp_api;"
+docker exec -i postgres-sql psql -U alumno -d bootcamp_api < database/schema.sql
+```
+
+El `.env` se lee con `process.loadEnvFile()` (Node 20.12 o superior), solo si existe: en Render no hay `.env` y las variables las pone Render.
 
 ## Desplegar en Render
 
