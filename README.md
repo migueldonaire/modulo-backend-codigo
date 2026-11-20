@@ -24,12 +24,20 @@ Estas dos carpetas incluyen las soluciones de los ejercicios y retos. Su `README
 | `04-nestjs-auth` | `04_nestjs_autenticacion.md` | La 03b con registro, login (argon2 + JWT), `AuthGuard` y `EmployeeGuard`: los clientes leen y los empleados editan. |
 | `05-nestjs-testing-swagger` | `05_nestjs_testing_swagger.md` | La 04 con tests de Jest (unitarios y de integración) y Swagger. |
 
+### Microservicios con NestJS
+
+| Carpeta | Apuntes | Qué hay |
+|---|---|---|
+| `09a-microservicios-tcp` | `09a_microservicios_nestjs_tcp.md` | La tienda de libros partida en `gateway`, `books-service` y `orders-service`, hablando por TCP. |
+| `09b-microservicios-kafka` | `09b_microservicios_kafka.md` | La 09a con eventos en Kafka, `notifications-service`, todo en `docker compose` y un ejemplo pequeño de RabbitMQ. |
+
 ## Requisitos
 
 - Node.js 24 LTS.
 - Docker.
 - Para `02b`: el contenedor de MongoDB de la clase de Mongo (`mongodb-practica`, usuario `admin`), o el `compose.yaml` de la carpeta.
 - Para `03b`, `04` y `05`: el contenedor de PostgreSQL de la clase de SQL (`postgres-sql`, usuario `alumno`).
+- Para `09b`: nada más que Docker (el `compose.yaml` trae Kafka).
 
 ## Puesta en marcha
 
