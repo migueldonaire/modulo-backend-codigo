@@ -23,13 +23,16 @@ Estas dos carpetas incluyen las soluciones de los ejercicios y retos. Su `README
 | `03b-nestjs-postgresql` | `03b_nestjs_postgresql.md` | La 03a con el servicio contra PostgreSQL (`pg`, SQL a mano, sin ORM). |
 | `04-nestjs-auth` | `04_nestjs_autenticacion.md` | La 03b con registro, login (argon2 + JWT), `AuthGuard` y `EmployeeGuard`: los clientes leen y los empleados editan. |
 | `05-nestjs-testing-swagger` | `05_nestjs_testing_swagger.md` | La 04 con tests de Jest (unitarios y de integración) y Swagger. |
+| `07-nestjs-api-real` | `07_nestjs_api_mundo_real.md` | La 03b con versiones (`/api/v1`, `/api/v2`), paginación y orden, `helmet`, límite de peticiones, pedidos con `JOIN` y transacción, errores con la misma forma y logs. |
+| `08-nestjs-extras` | `08_nestjs_extras.md` | La 07 con subida de portadas (carpeta local y Supabase Storage), caché con Redis, cola de correos (BullMQ), WebSockets (Socket.IO), GraphQL y HATEOAS. |
 
 ## Requisitos
 
 - Node.js 24 LTS.
 - Docker.
 - Para `02b`: el contenedor de MongoDB de la clase de Mongo (`mongodb-practica`, usuario `admin`), o el `compose.yaml` de la carpeta.
-- Para `03b`, `04` y `05`: el contenedor de PostgreSQL de la clase de SQL (`postgres-sql`, usuario `alumno`).
+- Para `03b`, `04`, `05`, `07` y `08`: el contenedor de PostgreSQL de la clase de SQL (`postgres-sql`, usuario `alumno`).
+- Para `08`: también Redis (`docker run -d --name redis-practica -p 6379:6379 redis:8`).
 
 ## Puesta en marcha
 
@@ -37,7 +40,7 @@ Entra en la carpeta que quieras y:
 
 ```bash
 npm install
-cp .env.example .env   # en 02b, 03b, 04 y 05
+cp .env.example .env   # en 02b, 03b, 04, 05, 07 y 08
 ```
 
 Después sigue el `README.md` de esa carpeta.

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Libros en directo</title>
+  </head>
+  <body>
+    <h1>Libros en directo</h1>
+
+    <h2>Libros nuevos</h2>
+    <ul id="books"></ul>
+
+    <h2>Chat</h2>
+    <form id="chat-form">
+      <input id="chat-text" placeholder="Escribe algo" autocomplete="off" />
+      <button>Enviar</button>
+    </form>
+    <ul id="messages"></ul>
+
+    <!-- El propio servidor de Socket.IO nos da la librería del cliente -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
