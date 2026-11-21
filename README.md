@@ -31,8 +31,10 @@ Estas dos carpetas incluyen las soluciones de los ejercicios y retos. Su `README
 - Node.js 24 LTS.
 - Docker.
 - Para `02b`: el contenedor de MongoDB de la clase de Mongo (`mongodb-practica`, usuario `admin`), o el `compose.yaml` de la carpeta.
-- Para `03b`, `04`, `05`, `07` y `08`: el contenedor de PostgreSQL de la clase de SQL (`postgres-sql`, usuario `alumno`).
+- Para `03b`, `04` y `05`: el `compose.yaml` de la carpeta (PostgreSQL 17 con su `schema.sql` ya cargado), o el contenedor de PostgreSQL de la clase de SQL (`postgres-sql`, usuario `alumno`).
+- Para `07` y `08`: el contenedor de PostgreSQL de la clase de SQL (`postgres-sql`, usuario `alumno`).
 - Para `08`: también Redis (`docker run -d --name redis-practica -p 6379:6379 redis:8`).
+- Los `compose.yaml` de `03b`, `04` y `05` usan el mismo puerto (5432), igual que `postgres-sql`: ten solo uno encendido. Para el resto, `docker compose stop` en su carpeta o `docker stop <contenedor>`.
 
 ## Puesta en marcha
 
@@ -41,6 +43,7 @@ Entra en la carpeta que quieras y:
 ```bash
 npm install
 cp .env.example .env   # en 02b, 03b, 04, 05, 07 y 08
+docker compose up -d   # en 02b, 03b, 04 y 05: arranca la base de datos
 ```
 
 Después sigue el `README.md` de esa carpeta.
