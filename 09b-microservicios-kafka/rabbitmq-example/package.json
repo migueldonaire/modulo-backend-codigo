@@ -1,0 +1,12 @@
+{
+  "name": "rabbitmq-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "send": "node send.js",
+    "receive": "node receive.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.9"
+  }
+}

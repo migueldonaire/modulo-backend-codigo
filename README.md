@@ -26,6 +26,13 @@ Estas dos carpetas incluyen las soluciones de los ejercicios y retos. Su `README
 | `07-nestjs-api-real` | `07_nestjs_api_mundo_real.md` | La 03b con versiones (`/api/v1`, `/api/v2`), paginación y orden, `helmet`, límite de peticiones, pedidos con `JOIN` y transacción, errores con la misma forma y logs. |
 | `08-nestjs-extras` | `08_nestjs_extras.md` | La 07 con subida de portadas (carpeta local y Supabase Storage), caché con Redis, cola de correos (BullMQ), WebSockets (Socket.IO), GraphQL y HATEOAS. |
 
+### Microservicios con NestJS
+
+| Carpeta | Apuntes | Qué hay |
+|---|---|---|
+| `09a-microservicios-tcp` | `09a_microservicios_nestjs_tcp.md` | La tienda de libros partida en `gateway`, `books-service` y `orders-service`, hablando por TCP. |
+| `09b-microservicios-kafka` | `09b_microservicios_kafka.md` | La 09a con eventos en Kafka, `notifications-service`, todo en `docker compose` y un ejemplo pequeño de RabbitMQ. |
+
 ## Requisitos
 
 - Node.js 24 LTS.
@@ -35,6 +42,7 @@ Estas dos carpetas incluyen las soluciones de los ejercicios y retos. Su `README
 - Para `07` y `08`: el contenedor de PostgreSQL de la clase de SQL (`postgres-sql`, usuario `alumno`).
 - Para `08`: también Redis (`docker run -d --name redis-practica -p 6379:6379 redis:8`).
 - Los `compose.yaml` de `03b`, `04` y `05` usan el mismo puerto (5432), igual que `postgres-sql`: ten solo uno encendido. Para el resto, `docker compose stop` en su carpeta o `docker stop <contenedor>`.
+- Para `09b`: nada más que Docker (el `compose.yaml` trae Kafka).
 
 ## Puesta en marcha
 
